@@ -1,21 +1,59 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #121110;
+  --color-surface: #1a1917;
+  --color-raised: #232220;
+  --color-line: #33312c;
+  --color-paper: #ebe6da;
+  --color-mute: #9a9488;
+  --color-dim: #6c675d;
+
+  --color-like: #e0846f;
+
+  --color-error-border: #8a3a2e;
+  --color-error-bg: #2a1411;
+  --color-error-title: #f0b8aa;
+  --color-error-body: #d9a99d;
+
+  --color-warn-border: #a8742c;
+  --color-warn-bg: #2b2010;
+  --color-warn-accent: #f0b36a;
+  --color-warn-text: #f5cf9b;
+  --color-warn-body: #d9bd92;
+
+  --color-rain: #7d9db8;       --color-rain-base: #1b2733;    --color-rain-tint: #dce8f2;
+  --color-amber: #d6a26b;      --color-amber-base: #2e1d12;   --color-amber-tint: #f5e0bd;
+  --color-rust: #b9594a;       --color-rust-base: #2a1210;    --color-rust-tint: #f0c6b8;
+  --color-mustard: #c9a43e;    --color-mustard-base: #26200a; --color-mustard-tint: #f1e4a8;
+  --color-rose: #c98aa6;       --color-rose-base: #2b1a24;    --color-rose-tint: #f1d3e0;
+  --color-sage: #7fb5a6;       --color-sage-base: #10231e;    --color-sage-tint: #cfe9e1;
+  --color-violet: #8a7fc4;     --color-violet-base: #1a1630;  --color-violet-tint: #d8d3f2;
+  --color-linen: #d4b896;      --color-linen-base: #2b2118;   --color-linen-tint: #f6ead6;
+  --color-moss: #a5c26a;       --color-moss-base: #1a2210;    --color-moss-tint: #e4efc6;
+  --color-orange: #e08a5a;     --color-orange-base: #2c1509;  --color-orange-tint: #fbd9bf;
+  --color-lilac: #a58fc9;      --color-lilac-base: #1d1730;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-fraunces-next);
   --font-sans: var(--font-instrument-sans);
   --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-palette="rain"]    { --accent: #7d9db8; --base: #1b2733; --tint: #dce8f2; }
+[data-palette="amber"]   { --accent: #d6a26b; --base: #2e1d12; --tint: #f5e0bd; }
+[data-palette="rust"]    { --accent: #b9594a; --base: #2a1210; --tint: #f0c6b8; }
+[data-palette="mustard"] { --accent: #c9a43e; --base: #26200a; --tint: #f1e4a8; }
+[data-palette="rose"]    { --accent: #c98aa6; --base: #2b1a24; --tint: #f1d3e0; }
+[data-palette="sage"]    { --accent: #7fb5a6; --base: #10231e; --tint: #cfe9e1; }
+[data-palette="violet"]  { --accent: #8a7fc4; --base: #1a1630; --tint: #d8d3f2; }
+[data-palette="linen"]   { --accent: #d4b896; --base: #2b2118; --tint: #f6ead6; }
+[data-palette="moss"]    { --accent: #a5c26a; --base: #1a2210; --tint: #e4efc6; }
+[data-palette="orange"]  { --accent: #e08a5a; --base: #2c1509; --tint: #fbd9bf; }
+[data-palette="lilac"]   { --accent: #a58fc9; --base: #1d1730; }
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
 }

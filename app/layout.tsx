@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Fraunces, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
-  variable: "--font-fraunces",
+  variable: "--font-fraunces-next",
   subsets: ["latin"],
   style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"]
 });
 
 const instrumentSans = Instrument_Sans({
@@ -26,11 +28,71 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${fraunces.variable} ${instrumentSans.variable} ${plexMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+    <html lang="en" className={`${fraunces.variable} ${instrumentSans.variable} ${plexMono.variable} h-full antialiased`}>
+      <body data-palette="rain" className="min-h-full flex flex-col bg-ink font-sans text-paper">
+        <header>
+          <nav className="mx-auto flex w-full max-w-7xl items-center gap-20 px-6 py-5">
+            <div className="flex items-center justify-center">
+              <p className="font-display text-3xl">Sundr.</p>
+            </div>
+
+            <div className="flex flex-1 items-center justify-between">
+              <div>
+                <ul className="flex gap-10 text-sm text-mute">
+                  <li className="hover:text-(--accent) duration-300"><Link href="#">Discover</Link></li>
+                  <li className="hover:text-(--accent) duration-300"><Link href="#">Challenges</Link></li>
+                  <li className="hover:text-(--accent) duration-300"><Link href="#">My Library</Link></li>
+                </ul>
+              </div>
+
+              <div>
+                <ul className="flex items-center gap-3 text-sm">
+                  <li><Link href="/sign-in" className="block rounded-md border border-line px-4 py-2">Sign In</Link></li>
+                  <li><Link href="/sign-up" className="block rounded-md border border-line bg-paper text-ink px-4 py-2">Sign Up</Link></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+
+        <main className="mx-auto w-full max-w-7xl px-6">
+          {children}
+        </main>
+
+        <footer className="mt-auto border-t border-line">
+          <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
+            <div>
+              <p className="font-display text-3xl">Sundr.</p>
+              <p className="mt-4 max-w-sm text-lg text-mute">An independent community for people who find music through other people. Not a streaming service. Never will be.</p>
+            </div>
+            <div>
+              <h3 className="font-mono text-xs uppercase tracking-widest text-mute">Explore</h3>
+              <ul className="mt-4 flex flex-col gap-3 text-paper/70">
+                <li><Link href="/">Discover</Link></li>
+                <li><Link href="/search">Search</Link></li>
+                <li><Link href="/following">Following</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-mono text-xs uppercase tracking-widest text-mute">Make</h3>
+              <ul className="mt-4 flex flex-col gap-3 text-paper/70">
+                <li><Link href="#">Import</Link></li>
+                <li><Link href="#">Export</Link></li>
+                <li><Link href="#">New playlist</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-mono text-xs uppercase tracking-widest text-mute">Club</h3>
+              <ul className="mt-4 flex flex-col gap-3 text-paper/70">
+                <li><Link href="#">About</Link></li>
+                <li><Link href="#">Guidelines</Link></li>
+                <li><Link href="#">Contact</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-line py-5 text-center font-mono text-xs uppercase tracking-widest text-mute">© Sundr. — Made by listeners, for listeners</div>
+        </footer>
+      </body>
     </html>
   );
 }
