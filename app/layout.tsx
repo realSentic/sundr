@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Fraunces, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import Navbar from "@/app/components/site-comp/navbar";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -30,30 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${fraunces.variable} ${instrumentSans.variable} ${plexMono.variable} h-full antialiased`}>
       <body data-palette="rain" className="min-h-full flex flex-col bg-ink font-sans text-paper">
-        <header>
-          <nav className="mx-auto flex w-full max-w-7xl items-center gap-20 px-6 py-5">
-            <div className="flex items-center justify-center">
-              <Link href="/" className="font-display text-3xl">Sundr.</Link>
-            </div>
-
-            <div className="flex flex-1 items-center justify-between">
-              <div>
-                <ul className="flex gap-10 text-sm text-mute">
-                  <li className="hover:text-(--accent) duration-300"><Link href="#">Discover</Link></li>
-                  <li className="hover:text-(--accent) duration-300"><Link href="#">Challenges</Link></li>
-                  <li className="hover:text-(--accent) duration-300"><Link href="#">My Library</Link></li>
-                </ul>
-              </div>
-
-              <div>
-                <ul className="flex items-center gap-3 text-sm">
-                  <li><Link href="/sign-in" className="block rounded-md border border-line px-4 py-2">Sign In</Link></li>
-                  <li><Link href="/signup" className="block rounded-md border border-line bg-paper text-ink px-4 py-2">Sign Up</Link></li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </header>
+        <Navbar />
 
         <main className="mx-auto w-full max-w-7xl px-6">
           {children}

@@ -10,6 +10,10 @@ export default function SettingsForm () {
     const [email, setEmail] = useState("");
     const [displayName, setDisplayName] = useState("");
 
+    const [avatarUrl, setAvatarUrl] = useState("");
+    const [avatarFile, setAvatarFile] = useState<File | null>(null);
+    const [avatarPreview, setAvatarPreview] = useState("");
+
     useEffect(() => {
         async function loadUser() {
             const { data } = await supabase.auth.getUser()
@@ -21,9 +25,30 @@ export default function SettingsForm () {
 
         loadUser()
     }, [])
+    
+    useEffect(() => {
+        return () => {
+            if (avatarPreview) URL.revokeObjectURL(avatarPreview)
+        }
+    }, [avatarPreview])
+
+    function handleAvatarProfile (e: React.ChangeEvent<HTMLInputElement>) {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        if (!file.type.startsWith("image/") || file.size > 2 * 1024 * 1024) {
+            setStatus("Set an image under 2MB.")
+            return
+        }
+
+        setStatus(null)
+        setAvatarFile(file)
+        setAvatarPreview(URL.createObjectURL(file))
+    }
 
     async function handleSavingProfile () {
         setSaving(true)
+        setStatus(null)
 
         const { error } = await supabase.auth.updateUser({ data: { display_name: displayName.trim(), username: username.trim() } })
 
