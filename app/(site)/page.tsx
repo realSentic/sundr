@@ -1,11 +1,11 @@
 import Link from "next/link";
+import WelcomeMessage from "../components/site-comp/welcome-text";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col gap-20 pb-20">
       <div>
-        <h1 className="pt-15 font-display italic font-light text-8xl" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' }}>Good evening.</h1>
-        <p className="pt-5 text-xl font-sans text-mute">Enjoy some tunes, dawg.</p>
+        <WelcomeMessage />
       </div>
 
       <div className="flex items-baseline justify-between">
