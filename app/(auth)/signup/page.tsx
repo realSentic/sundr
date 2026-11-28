@@ -20,7 +20,7 @@ export default function SignUpPage() {
                 </h3>
 
                 <span className="font-mono text-xs uppercase tracking-widest text-mute">
-                    <Link href="/login">Have an account? Log in →</Link>
+                    <Link href="/signin">Have an account? Log in →</Link>
                 </span>
             </div>
 

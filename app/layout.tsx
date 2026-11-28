@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${instrumentSans.variable} ${plexMono.variable} h-full antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${fraunces.variable} ${instrumentSans.variable} ${plexMono.variable} h-full antialiased`}>
       <body data-palette="rain" className="min-h-full flex flex-col bg-ink font-sans text-paper">
         <Navbar />
 

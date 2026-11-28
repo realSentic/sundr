@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/app/lib/supabase";
 
-const display = { fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' };
-
 const SAVED = "Profile has been saved.";
 
 export default function SettingsForm () {
@@ -34,7 +32,6 @@ export default function SettingsForm () {
         loadUser()
     }, [])
 
-    // frees the temporary preview URL when it changes or the page closes
     useEffect(() => {
         return () => {
             if (avatarPreview) URL.revokeObjectURL(avatarPreview)
@@ -61,7 +58,6 @@ export default function SettingsForm () {
 
         let newAvatarUrl = avatarUrl
 
-        // 1. upload the new picture first (only if one was chosen)
         if (avatarFile) {
             const ext = avatarFile.name.split(".").pop()
             const path = `${userId}/avatar-${Date.now()}.${ext}`
@@ -77,8 +73,10 @@ export default function SettingsForm () {
             newAvatarUrl = supabase.storage.from("avatars").getPublicUrl(path).data.publicUrl
         }
 
-        // 2. save everything in one go
-        const { error } = await supabase.auth.updateUser({ data: { display_name: displayName.trim(), username: username.trim(), avatar_url: newAvatarUrl } })
+        const { data: current } = await supabase.auth.getUser()
+        const emailChanged = email.trim() !== current.user?.email
+
+        const { error } = await supabase.auth.updateUser({...(emailChanged && { email: email.trim() }), data: { display_name: displayName.trim(), username: username.trim(), avatar_url: newAvatarUrl } })
 
         if (error) {
             setStatus(error.message)
